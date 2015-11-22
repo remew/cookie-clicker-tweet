@@ -9,34 +9,24 @@ function sendMessage(message) {
 }
 
 chrome.contextMenus.create({
-	"title": "現在のCPSをツイート",
-	"documentUrlPatterns": ["http://orteil.dashnet.org/cookieclicker/*"],
-	"id": "tweet",
-	"onclick": function(info) {
-		console.log(info);
+	'title': '現在のCPSをツイート',
+	'documentUrlPatterns': ['http://orteil.dashnet.org/cookieclicker/*'],
+	'id': 'tweet',
+	'onclick': function(info) {
 		sendMessage(info.menuItemId);
 	},
 });
 chrome.contextMenus.create({
-	"title": "設定",
-	"documentUrlPatterns": ["http://orteil.dashnet.org/cookieclicker/*"],
-	"id": "config",
-	"onclick": function(info) {
-		console.log(info);
-		sendMessage(info.menuItemId);
+	'title': '設定を開く',
+	'documentUrlPatterns': ['http://orteil.dashnet.org/cookieclicker/*'],
+	'id': 'config',
+	'onclick': function(info) {
+		chrome.tabs.create({url: '/src/options/index.html'});
 	},
 });
 
-/*chrome.storage.local.get(['name', 'kosen'], function(data) {
-	var nickname = data.name;
-	var kosen = data.kosen;
-	console.log(nickname, kosen);
-});*/
-
 chrome.storage.onChanged.addListener(function(changes, namespace) {
-	var nickname = changes.name.newValue;
-	var kosen = changes.kosen.newValue;
-	console.log(nickname, kosen);
+	//storageが更新された時に呼ばれる
 });
 
 

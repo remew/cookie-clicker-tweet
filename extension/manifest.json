@@ -9,10 +9,6 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "browser_action": {
-    "default_icon": "icons/icon19.png",
-    "default_popup": "src/browser_action/browser_action.html"
-  },
   "background": {
     "scripts": [
       "src/background/background.js"
@@ -22,12 +18,11 @@
   "content_scripts": [
 	  {
 		  "matches": ["http://*/*"],
-		  "js": ["src/content_scripts/test.js"]
+		  "js": ["src/content_scripts/script.js"]
 	  }
   ],
   "options_page": "src/options/index.html",
   "permissions": [
-    "notifications",
 	"storage",
 	"contextMenus",
 	"tabs"
