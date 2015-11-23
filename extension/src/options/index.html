@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style type="text/css">
+			#mainPopup {
+				padding: 10px;
+				height: 200px;
+				width: 400px;
+				font-family: Helvetica, Ubuntu, Arial, sans-serif;
+			}
+			h1 {
+				font-size: 2em;
+			}
+		</style>
+	</head>
+	<body>
+    <h1>設定画面</h1>
+    <p>各種設定（複数項目あるとは言ってない）</p>
+		<h2>ツイートテンプレート</h2>
+		<p>CPSをツイートするときのテンプレートを設定できます。<br>
+		テンプレートには「{CPS}」と「{COOKIES}」という2種類の変数があり、テンプレート内で使用することができます。<br>
+		例えば、「現在{COOKIES}枚です（{CPS}C/S）」というテンプレートを設定すると、ツイートするときには「現在100枚です（0.1C/S）」と表示されます。</p>
+		<textarea type="text" id="template" name="template"></textarea></br>
+		<button type="button" id="updateButton">テンプレート更新</button>
+		<script type="text/javascript" src="option.js"></script>
+	</body>
+</html>
