@@ -1,22 +1,18 @@
 
-chrome.runtime.onMessage.addListener(function(message) {
-	console.log(message);
+chrome.runtime.onMessage.addListener((message) => {
 	if (message === 'tweet') {
 		tweetCps();
 	}
 });
 
 function tweetCps() {
-	chrome.storage.local.get(['template'], function(data) {
-		console.log(data);
+	chrome.storage.local.get(['template'], (data) => {
 		var template = data.template;
 		if (!template) {
 			template = '毎秒{CPS}枚のクッキーを作っています！'
 		}
 		var data = extractTemplateData();
-		console.log(tweet);
 		var tweet = generateTweet(template, data);
-		console.log(tweet);
 		openTweetWindow(tweet);
 	});
 }

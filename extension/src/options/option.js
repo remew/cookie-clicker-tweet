@@ -1,7 +1,7 @@
 
 registSendButton();
 
-chrome.storage.local.get(['template'], function(data) {
+chrome.storage.local.get(['template'], (data) => {
 	if (data.template) {
 		document.getElementById('template').value = data.template;
 	}
@@ -16,7 +16,7 @@ function registSendButton() {
 }
 
 function saveTemplate(template) {
-	chrome.storage.local.set({template: template}, function() {
+	chrome.storage.local.set({template: template}, () => {
 		alert('テンプレートを更新しました！');
 	});
 }
