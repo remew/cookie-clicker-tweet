@@ -5,6 +5,34 @@ chrome.runtime.onMessage.addListener((message) => {
 	}
 });
 
+function injectMetaData() {
+	var scriptEl = document.createElement('script');
+	var script =
+	'var c = Game.cookies;' +
+	'var cps = Game.cookiesPs;' +
+	'var cookiesMeta = document.querySelector("meta[name=cookies]");' +
+	'var cpsMeta = document.querySelector("meta[name=cps]");' +
+	'if (cookiesMeta === null) {' +
+		'cookiesMeta = document.createElement("meta");' +
+		'cookiesMeta.name = "cookies";' +
+		'document.head.appendChild(cookiesMeta);' +
+	'}' +
+	'if (cpsMeta === null) {' +
+		'cpsMeta = document.createElement("meta");' +
+		'cpsMeta.name = "cps";' +
+		'document.head.appendChild(cpsMeta);' +
+	'}' +
+	'cookiesMeta.content = c;' +
+	'cpsMeta.content = cps;';
+
+	script = ';(function(){' + script + '})()';
+
+	scriptEl.textContent = script;
+
+	document.body.appendChild(scriptEl);
+	document.body.removeChild(scriptEl);
+}
+
 function tweetCps() {
 	chrome.storage.local.get(['template'], (data) => {
 		var template = data.template;
@@ -18,11 +46,11 @@ function tweetCps() {
 }
 
 function extractTemplateData() {
-	var cookieEl = document.getElementById('cookies');
-	var cookies = cookieEl.childNodes[0].textContent.split(' ')[0];
-	var cpsEl = cookieEl.getElementsByTagName('div')[0];
-	var text = cpsEl.innerText;
-	var cps = text.replace('per second : ', '');
+	injectMetaData();
+	var cookiesMeta = document.querySelector('meta[name=cookies]');
+	var cpsMeta = document.querySelector('meta[name=cps]');
+	var cookies = cookiesMeta.content;
+	var cps = cpsMeta.content;
 	return {
 		cps: cps,
 		cookies: cookies,

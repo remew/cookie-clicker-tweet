@@ -12,6 +12,7 @@ chrome.contextMenus.create({
 	'title': '現在のCPSをツイート',
 	'documentUrlPatterns': ['http://orteil.dashnet.org/cookieclicker/*'],
 	'id': 'tweet',
+	'contexts': ['all'],
 	'onclick': (info) => {
 		sendMessage(info.menuItemId);
 	},
@@ -20,6 +21,7 @@ chrome.contextMenus.create({
 	'title': '設定を開く',
 	'documentUrlPatterns': ['http://orteil.dashnet.org/cookieclicker/*'],
 	'id': 'config',
+	'contexts': ['all'],
 	'onclick': () => {
 		chrome.tabs.create({url: '/src/options/index.html'});
 	},
